@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block container %}
+	    <div class="row">
+	    	<div class="col-md-7">
+	    		{% for articulo  in articulos  %}
+	    		<article>
+	    			<h2><a herf= "{% url 'articulo' articulo.slug %}" >{{articulo.titulo}} </a></h2>
+	    			publicado hace <strong> {{articulo.fecha|timesince}}</strong> |
+	    			por <strong>{{articulo.autor.get_full_name}}</strong>|
+	    			<strong>{{articulo.likes}}</strong>me gusta
+	    		
+	    			<img class= 'portada' src="/media/{{ articulo.portada  }}" alt="portada">
+	    				<div>
+	    			{{articulo.contenido|linebreaks|truncatewords:30}}
+	    		</div>
+	    		<p>
+	    			<a class="btn btn-success btn-sn" href="{% url 'articulo' articulo.slug %}">Continuar Leyendo</a>
+	    		</p>
+	    	</article>
+	    	<hr>
+	    {% endfor %}
+	    	</div>
+
+	    	<div class="col-md-4"></div>
+
+	    </div>
+	    	
+	{% endblock %}
